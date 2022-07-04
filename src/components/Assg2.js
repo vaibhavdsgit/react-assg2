@@ -7,33 +7,14 @@ import axios from 'axios'
 export const Assg2 = () =>{
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchRecord, setSearchRecord] = useState();
 
-    const {isLoading, data} = useQuery('user-data', ()=>{
+    const {isLoading, data, refetch} = useQuery('user-data', ()=>{
         return axios.get('https://api.github.com/users')
+    },
+    {
+        enabled:false,
     })
 
-    // const clickHandler=(event)=>{
-    //     console.log("clicked");
-    //     // console.log({data});
-        
-    //         // setSearchRecord(data?.data.filter((val)=>{
-    //         //     return val.login.includes(searchTerm)
-    //         // }))
-
-    //         // setSearchRecord(data?.data.filter((val)=>{
-    //         //     return val.login.includes(searchTerm)
-    //         // }))
-
-    //         // setSearchRecord(data?.data)
-    //         // console.log(searchRecord)
-    //         // setSearchRecord([data.data])
-    //         console.log([data.data])
-    //         setSearchRecord([data.data])
-    // }
-    
-    
-    
     return(
         <>
             <h3>Hello</h3>
@@ -42,18 +23,32 @@ export const Assg2 = () =>{
                 setSearchTerm(event.target.value)
             }}></input>
 
-            <p>{data?.data.filter((val)=>{
-                return val.login.includes(searchTerm)
-            }).map((user)=>{
-                return <div key={user.login}>Login: {user.login}, URL: {user.url}</div>
-            })}</p>
+            <button onClick={refetch}>Fetch User Data</button>
 
+            <table>
+                <tr>
+                    <th>Login Name</th>
+                    <th>Node Id</th>
+                    <th>HTML URL</th>
+                    <th>Followers URL</th>
+                    <th>Repo URL</th>
+                </tr>
+                {data?.data.filter((val)=>{
+                    return val.login.includes(searchTerm)
+                }).map((user)=>{
+                    return (
+                    <tr>
+                        <td>{user.login}</td>
+                        <td>{user.node_id}</td>
+                        <td>{user.html_url}</td>
+                        <td>{user.followers_url}</td>
+                        <td>{user.repos_url}</td>
+                    </tr>
+                    )
+            })}
+            </table>
             
-            
-            {/* <button onClick={clickHandler}>Click</button>
-            {/* {searchRecord.map((user)=>{
-                return <div>{user.login}</div>
-            })} */} 
+ 
         </>
     )
     

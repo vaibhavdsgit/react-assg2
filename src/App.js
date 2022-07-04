@@ -10,8 +10,8 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
-        {/* <Assg2/> */}
-        <Assignment2 />
+        <Assg2/>
+        {/* <Assignment2 /> */}
       </div>
     </QueryClientProvider>
   );
