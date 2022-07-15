@@ -5,7 +5,7 @@ import axios from 'axios'
 import UserDisplay from './UserDisplay';
 
 
-function Assignment2() {
+const Assignment2 = () => {
 
     const {register, handleSubmit} = useForm();     
     const [userData, setUserData] = useState([]);   //store filtered data
