@@ -1,3 +1,4 @@
+// API fetching using react-query
 import {useQuery} from 'react-query';
 import { useState } from 'react';
 
